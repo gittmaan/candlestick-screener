@@ -1,7 +1,16 @@
 import talib
 import yfinance as yf
 
-data = yf.download("SPY", start="2020-01-01", end="2020-08-01")
+from datetime import date
+from dateutil.relativedelta import relativedelta
+
+today = date.today()
+oneYearFromToday = today + relativedelta(years=-1)
+
+today = date.today()
+print("Today's date:", today, oneYearFromToday)
+
+data = yf.download("SPY", start=oneYearFromToday, end=today)
 
 morning_star = talib.CDLMORNINGSTAR(data['Open'], data['High'], data['Low'], data['Close'])
 
